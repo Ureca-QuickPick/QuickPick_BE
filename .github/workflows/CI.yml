@@ -30,6 +30,9 @@ jobs:
           mysql user: 'test'
           mysql password: 'testPW'
 
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.6.0
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5
 
@@ -52,6 +55,29 @@ jobs:
           spring.jpa.properties.hibernate.show_sql=true
           spring.jpa.hibernate.ddl-auto=create-drop
           spring.jpa.properties.hibernate.format_sql=true
+
+
+          jwt.issuer=${{ secrets.JWT_ISSUER }}
+          jwt.secret_key=${{ secrets.JWT_SECRET_KEY }}
+          
+          # OAuth
+          spring.security.oauth2.client.registration.google.client-id=${{ secrets.GOOGLE_CLIENT_ID }}
+          spring.security.oauth2.client.registration.google.client-secret=${{ secrets.GOOGLE_CLIENT_SECRET }}
+          spring.security.oauth2.client.registration.google.scope=email,profile
+          
+          spring.security.oauth2.client.provider.google.authorization-uri=https://accounts.google.com/o/oauth2/v2/auth
+          spring.security.oauth2.client.provider.google.token-uri=https://oauth2.googleapis.com/token
+          spring.security.oauth2.client.provider.google.user-info-uri=https://www.googleapis.com/oauth2/v3/userinfo
+          
+          #Redis
+          spring.data.redis.host=localhost
+  
+          spring.data.redis.port=6379
+          
+          spring.data.redis.lettuce.pool.max-active=10
+          spring.data.redis.lettuce.pool.max-idle=10
+          spring.data.redis.lettuce.pool.min-idle=1
+          spring.data.redis.lettuce.pool.max-wait=1000ms
           EOT
         shell: bash
 
