@@ -53,7 +53,7 @@ public class TokenProviderTest {
         assertThat(userId).isEqualTo(testUser.getUserId());
     }
 
-    @DisplayName("토큰 검증 테스트-일부러 틀리도록?")
+    @DisplayName("토큰 검증 테스트-실패")
     @Test
     void validateToken_fail() {
         String token = JwtFactory.builder()

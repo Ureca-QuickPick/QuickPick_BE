@@ -42,9 +42,8 @@ public class AuthControllerOAuth {
         return ResponseEntity.ok().build();
     }
 
-
     @PostMapping("/auth/token")                                        //jwt 엑세스 토큰 재발급
-    public ResponseEntity<?> createNewAccessToken( //ResponseEntity<CreateAccessTokenResponse>-> ResponseEntity<?>로 수정
+    public ResponseEntity<?> createNewAccessToken(
             @RequestBody CreateAccessTokenRequestOAuth request) {
         try {
             String newAccessToken

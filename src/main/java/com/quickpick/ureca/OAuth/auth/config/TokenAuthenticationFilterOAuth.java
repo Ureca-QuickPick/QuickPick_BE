@@ -43,6 +43,7 @@ public class TokenAuthenticationFilterOAuth extends OncePerRequestFilter {
             setErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
     }
+
     //에러 메세지 설정 메서드
     private void setErrorResponse(HttpServletResponse response, int status, String message) throws IOException {
         response.setStatus(status);

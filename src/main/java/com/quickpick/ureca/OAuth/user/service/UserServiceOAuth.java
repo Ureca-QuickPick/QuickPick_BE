@@ -19,7 +19,7 @@ public class UserServiceOAuth {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    //자체 로그인 유저 저장
+    //자체 로그인 유저 회원가입(=저장)
     public void saveUser(UserSignUpRequestOAuth dto) {
         userRepository.save(UserOAuth.builder()
                 .id(dto.getId())
@@ -31,7 +31,7 @@ public class UserServiceOAuth {
     }
 
     @Transactional
-    //구글 소셜 로그인 유저 저장
+    //구글 소셜 로그인 유저 회원가입(=저장)
     public UserOAuth saveFromOAuth2(OAuth2User oAuth2User) {
         String email = oAuth2User.getAttribute("email");
         String name = oAuth2User.getAttribute("name");

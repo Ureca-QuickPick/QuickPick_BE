@@ -25,7 +25,7 @@ public class TokenProviderOAuth {
     public String generateToken(UserOAuth user, Duration expiredAt) {
         Date now = new Date();
         return makeToken(user, new Date( now.getTime() + expiredAt.toMillis()));
-    } // expriedAt 만큼의 유효기간을 가진 토큰 생성
+    } // expiredAt 만큼의 유효기간을 가진 토큰 생성
 
     public String makeToken(UserOAuth user, Date expiry) {
 
@@ -56,6 +56,7 @@ public class TokenProviderOAuth {
         }
     }
 
+    //토큰을 가지고 인증 객체 생성
     public Authentication getAuthentication(String token) {
         Claims claims = getClaims(token);
         Set<SimpleGrantedAuthority> authorities
@@ -68,6 +69,7 @@ public class TokenProviderOAuth {
                 , authorities);
     }
 
+    //토큰 안의 userId 추출
     public Long getUserId(String token) {
         Claims claims = getClaims(token);
         return claims.get("user_id", Long.class);
