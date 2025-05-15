@@ -33,11 +33,11 @@ public class UserServiceOAuth {
     @Transactional
     //구글 소셜 로그인 유저 회원가입(=저장)
     public UserOAuth saveFromOAuth2(OAuth2User oAuth2User) {
-        String email = oAuth2User.getAttribute("email");
+        String id = oAuth2User.getAttribute("email");
         String name = oAuth2User.getAttribute("name");
 
         return userRepository.save(UserOAuth.builder()           //age와 gender는 더미로 채우기
-                .id(email)
+                .id(id)
                 .password("SOCIAL_USER") // 비밀번호는 사용하지 않으므로 더미
                 .name(name != null ? name : "소셜사용자")
                 .age(0) // 추후 입력 받을 수 있도록 기본값(더미값 입력)

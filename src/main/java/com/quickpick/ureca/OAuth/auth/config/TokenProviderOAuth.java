@@ -47,7 +47,7 @@ public class TokenProviderOAuth {
                     .parseSignedClaims(token);
         } catch (SecurityException | MalformedJwtException e) { //서명이 불일치한 경우 / 구조가 손상된 경우
             throw new JwtException("Invalid JWT signature");
-        } catch (ExpiredJwtException e) {                       //만료된 토큰인 경우
+        } catch (ExpiredJwtException e) {                       //만료된 토큰인 경우 (이 경우에만 엑세스 토큰 재발급 요청)
             throw new JwtException("JWT token expired");
         } catch (UnsupportedJwtException e) {                   //지원하지 않는 토큰인 경우
             throw new JwtException("Unsupported JWT token");
