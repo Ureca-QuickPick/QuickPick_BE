@@ -41,7 +41,13 @@ public class WebSecurityConfigOAuth {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))        //서버 세션 비활성화(jwt 사용하므로)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login", "/signup", "/auth/token", "/oauth2/**").permitAll()  // 로그인, 회원가입, 토큰 재발급, 소셜로그인은 인증 없이 접근
+                        .requestMatchers("/auth/login"
+                                , "/signup"
+                                , "/auth/token"
+                                , "/oauth2/**"
+                                //, "/signup2"          성능 테스트용 유저 생성시 url, 베포시에는 미사용
+                                )
+                        .permitAll()  // 로그인, 회원가입, 토큰 재발급, 소셜로그인은 인증 없이 접근
                         .anyRequest().authenticated()  // 그 외 요청은 인증 필요
                 )
                 .formLogin(AbstractHttpConfigurer::disable)             //폼로그인 비활성화

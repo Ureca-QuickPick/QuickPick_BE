@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Table
+@Table(indexes = {@Index(name = "idx_users_id", columnList = "id")})        //테이블 인덱싱
 @Entity
 @Getter
 @NoArgsConstructor
